@@ -1,0 +1,12 @@
+# See https://help.github.com/articles/ignoring-files for more about ignoring files.
+
+# Ignore IDE and OS specific files
+.idea
+.vs
+.history
+.rakeTasks
+.generators
+
+# Ignore data library file
+library_data.yml
+
