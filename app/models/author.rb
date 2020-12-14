@@ -3,7 +3,7 @@
 class Author
   attr_reader :name
 
-  def initialize(name:, biography: 'No biography provided')
+  def initialize(name, biography = 'No biography provided')
     @name = name
     @biography = biography
   end
