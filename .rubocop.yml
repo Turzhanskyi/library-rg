@@ -1,0 +1,10 @@
+# http://shopify.github.io/ruby-style-guide/rubocop.yml
+
+AllCops:
+  NewCops: enable
+
+Layout/LineLength:
+  Max: 100
+
+Style/Documentation:
+  Enabled: false
