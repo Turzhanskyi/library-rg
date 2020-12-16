@@ -15,9 +15,9 @@ class LibrarySeeds
 
   def add_books(quantity)
     quantity.times do
-      author_id = rand(1..15)
       book = Faker::Book.unique.title
-      @library.add_book(author_id, book)
+      author_id = rand(1..5)
+      @library.add_book(book, author_id)
     end
   end
 
@@ -27,23 +27,23 @@ class LibrarySeeds
       email = Faker::Internet.unique.email
       city = Faker::Address.city
       street = Faker::Address.street_name
-      house = rand(1..25)
+      house = rand(1..95)
       @library.add_reader(name, email, city, street, house)
     end
   end
 
   def add_orders(quantity)
     quantity.times do
-      book_id = rand(1..20)
-      reader_id = rand(1..18)
+      book_id = rand(1..10)
+      reader_id = rand(1..8)
       @library.add_order(book_id, reader_id)
     end
   end
 
   def add_library_seeds
-    add_authors(15)
-    add_books(20)
-    add_readers(18)
-    add_orders(40)
+    add_authors(5)
+    add_books(10)
+    add_readers(8)
+    add_orders(15)
   end
 end

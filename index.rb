@@ -2,15 +2,16 @@
 
 require_relative 'autoloader'
 
+puts '*** Welcome to our library! ***'
+
 library = Library.new
 library_seeds = LibrarySeeds.new(library)
 
-puts '*** Welcome to our library! ***'
 puts 'What would you like to do?'
 puts "-- Type '1' generate seeds to the library."
 puts "-- Type '2' add new author to the library."
-puts "-- Type '3' add new reader to the library."
-puts "-- Type '4' add new book to the library."
+puts "-- Type '3' add new book to the library."
+puts "-- Type '4' add new reader to the library."
 puts "-- Type '5' make an order."
 
 choice = gets.chomp
@@ -27,6 +28,13 @@ when '2'
   library.add_author(name, biography)
   puts 'The author has been added to the library'
 when '3'
+  puts 'Enter a title for the book'
+  title = gets.chomp
+  puts "Enter the author's ID"
+  author_id = gets.chomp.to_i - 1
+  library.add_book(title, author_id)
+  puts 'The book has been added to the library'
+when '4'
   puts "Enter the reader's first and last name"
   name = gets.chomp
   puts 'Add email'
@@ -36,16 +44,9 @@ when '3'
   puts 'Street name'
   street = gets.chomp
   puts 'House number'
-  house = gets.chomp.to_i
+  house = gets.chomp
   library.add_reader(name, email, city, street, house)
   puts 'The reader has been added to the library'
-when '4'
-  puts 'Enter a title for the book'
-  title = gets.chomp
-  puts "Enter the author's ID"
-  author_id = gets.chomp.to_i - 1
-  library.add_book(author_id, title)
-  puts 'The book has been added to the library'
 when '5'
   puts "Enter the book's ID"
   book_id = gets.chomp.to_i - 1

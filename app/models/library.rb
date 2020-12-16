@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Library
+  include Validator
+
   STORE = 'library_data.yml'
 
   def initialize
@@ -19,7 +21,7 @@ class Library
       @readers = data[:readers]
       @orders = data[:orders]
     else
-      puts 'Error!'
+      puts 'Library data is empty)'
     end
   end
 
@@ -33,17 +35,20 @@ class Library
     export_library_data
   end
 
+  def add_book(title, author_id)
+    validate author_id
+    @books.push Book.new(title, @authors[author_id])
+    export_library_data
+  end
+
   def add_reader(name, email, city, street, house)
     @readers.push Reader.new(name, email, city, street, house)
     export_library_data
   end
 
-  def add_book(author_id, title)
-    @books.push Book.new(@authors[author_id], title)
-    export_library_data
-  end
-
   def add_order(book_id, reader_id)
+    validate book_id
+    validate reader_id
     @orders.push Order.new(@books[book_id], @readers[reader_id])
     export_library_data
   end
@@ -54,5 +59,9 @@ class Library
 
   def all_export_data
     { authors: authors, books: books, readers: readers, orders: orders }
+  end
+
+  def validate(id)
+    validate_positive_value(id)
   end
 end
