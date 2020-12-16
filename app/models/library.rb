@@ -53,6 +53,18 @@ class Library
     export_library_data
   end
 
+  def popular_books(number = 1)
+    popular(number, :book)
+  end
+
+  def top_readers(number = 1)
+    popular(number, :reader)
+  end
+
+  def number_readers_popular_books(number = 3)
+    @orders.select { |order| popular_books(number).include? order.book }.map(&:reader).uniq.size
+  end
+
   private
 
   attr_reader :authors, :books, :readers, :orders
@@ -63,5 +75,9 @@ class Library
 
   def validate(id)
     validate_positive_value(id)
+  end
+
+  def popular(number, method)
+    @orders.group_by(&method).max_by(number) { |_, orders| orders.size }.map(&:first)
   end
 end

@@ -13,6 +13,7 @@ puts "-- Type '2' add new author to the library."
 puts "-- Type '3' add new book to the library."
 puts "-- Type '4' add new reader to the library."
 puts "-- Type '5' make an order."
+puts "-- Type '6' display statistic."
 
 choice = gets.chomp
 
@@ -54,6 +55,17 @@ when '5'
   reader_id = gets.chomp.to_i - 1
   library.add_order(book_id, reader_id)
   puts 'Order accepted'
+when '6'
+  puts 'Our statistic:'
+  puts '----------------------------------------------------------------------'
+  puts '1. Top Readers.'
+  library.top_readers.each { |object| puts object.reader_data }
+  puts '----------------------------------------------------------------------'
+  puts '2. Most Popular Books.'
+  library.popular_books.each { |object| puts object.book_data }
+  puts '----------------------------------------------------------------------'
+  puts '3. Number of readers of the Most Popular Books.'
+  puts "Number of readers: #{library.number_readers_popular_books}"
 else
   puts "Sorry, I didn't understand you."
 end
