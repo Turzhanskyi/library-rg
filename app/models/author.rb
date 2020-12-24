@@ -2,8 +2,7 @@
 
 class Author
   include Validator
-
-  attr_reader :name
+  attr_reader :name, :biography
 
   def initialize(name, biography = 'No biography provided')
     validate name

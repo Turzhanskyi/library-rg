@@ -2,7 +2,6 @@
 
 class Book
   include Validator
-
   attr_reader :title, :author
 
   def initialize(title, author)

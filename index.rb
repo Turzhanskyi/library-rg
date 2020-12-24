@@ -1,71 +1,39 @@
 # frozen_string_literal: true
 
-require_relative 'autoloader'
+require_relative 'app/config/autoloader'
 
-puts '*** Welcome to our library! ***'
+authors = []
+books = []
+readers = []
+orders = []
+
+15.times do
+  authors.push Author.new(Faker::Book.unique.author, Faker::Lorem.sentence(word_count: 3))
+end
+27.times { books.push Book.new(Faker::Book.unique.title, authors[rand(0..14)]) }
+68.times do
+  readers.push Reader.new(Faker::Name.name,
+                          Faker::Internet.unique.email,
+                          Faker::Address.city,
+                          Faker::Address.street_name,
+                          rand(1..95))
+end
+100.times { orders.push Order.new(books[rand(0..26)], readers[rand(0..67)]) }
 
 library = Library.new
-library_seeds = LibrarySeeds.new(library)
+library.add(authors)
+library.add(books)
+library.add(readers)
+library.add(orders)
+library.save(authors: authors, books: books, readers: readers, orders: orders)
 
-puts 'What would you like to do?'
-puts "-- Type '1' generate seeds to the library."
-puts "-- Type '2' add new author to the library."
-puts "-- Type '3' add new book to the library."
-puts "-- Type '4' add new reader to the library."
-puts "-- Type '5' make an order."
-puts "-- Type '6' display statistic."
-
-choice = gets.chomp
-
-case choice
-when '1'
-  library_seeds.add_library_seeds
-  puts 'New data generated to the library'
-when '2'
-  puts "Enter the author's name and surname"
-  name = gets.chomp
-  puts 'Add his biography'
-  biography = gets.chomp
-  library.add_author(name, biography)
-  puts 'The author has been added to the library'
-when '3'
-  puts 'Enter a title for the book'
-  title = gets.chomp
-  puts "Enter the author's ID"
-  author_id = gets.chomp.to_i - 1
-  library.add_book(title, author_id)
-  puts 'The book has been added to the library'
-when '4'
-  puts "Enter the reader's first and last name"
-  name = gets.chomp
-  puts 'Add email'
-  email = gets.chomp
-  puts 'The city where the reader lives'
-  city = gets.chomp
-  puts 'Street name'
-  street = gets.chomp
-  puts 'House number'
-  house = gets.chomp
-  library.add_reader(name, email, city, street, house)
-  puts 'The reader has been added to the library'
-when '5'
-  puts "Enter the book's ID"
-  book_id = gets.chomp.to_i - 1
-  puts "Enter the reader's ID"
-  reader_id = gets.chomp.to_i - 1
-  library.add_order(book_id, reader_id)
-  puts 'Order accepted'
-when '6'
-  puts 'Our statistic:'
-  puts '----------------------------------------------------------------------'
-  puts '1. Top Readers.'
-  library.top_readers.each { |object| puts object.reader_data }
-  puts '----------------------------------------------------------------------'
-  puts '2. Most Popular Books.'
-  library.popular_books.each { |object| puts object.book_data }
-  puts '----------------------------------------------------------------------'
-  puts '3. Number of readers of the Most Popular Books.'
-  puts "Number of readers: #{library.number_readers_popular_books}"
-else
-  puts "Sorry, I didn't understand you."
-end
+puts '*** Welcome to library! ***'
+puts 'Our statistic:'
+puts '----------------------------------------------------------------------'
+puts '1. Top Readers:'
+library.top_readers(4).each { |object| puts object.reader_data }
+puts '----------------------------------------------------------------------'
+puts '2. Most Popular Books:'
+library.popular_books(2).each { |object| puts object.book_data }
+puts '----------------------------------------------------------------------'
+puts "3. Number of readers of the Most Popular Books: #{library.number_readers_popular_books}"
