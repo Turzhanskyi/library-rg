@@ -16,7 +16,7 @@ module Validator
   end
 
   def validate_positive_value(value)
-    raise PositiveValueError, "#{value} should be positive number" if value.to_i.negative?
+    raise PositiveValueError, "#{value} should be positive number" unless value.to_i.positive?
   end
 
   def validate_date(date)
