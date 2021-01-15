@@ -37,8 +37,6 @@ class Library
 
   private
 
-  attr_reader :authors, :books, :readers, :orders
-
   def popular(number, method)
     @orders.group_by(&method).max_by(number) { |_, orders| orders.size }.map(&:first)
   end
