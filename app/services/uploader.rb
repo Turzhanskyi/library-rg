@@ -4,7 +4,7 @@ module Uploader
   STORE = 'library_data.yml'
 
   def load
-    File.file?(STORE) ? YAML.load_file(STORE) : {}
+    YAML.load_file(STORE) if File.file?(STORE)
   end
 
   def save(authors:, books:, readers:, orders:)

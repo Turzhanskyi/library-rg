@@ -2,9 +2,10 @@
 
 class Library
   include Uploader
+  include Seeds
 
   def initialize
-    data = load
+    data = load || {}
     @authors = data[:authors] || []
     @books = data[:books] || []
     @readers = data[:readers] || []
