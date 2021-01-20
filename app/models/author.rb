@@ -2,7 +2,6 @@
 
 class Author
   include Validator
-  attr_reader :name, :biography
 
   def initialize(name, biography = 'No biography provided')
     validate name
@@ -15,6 +14,8 @@ class Author
   end
 
   private
+
+  attr_reader :name, :biography
 
   def validate(name)
     validate_presence(name: name)

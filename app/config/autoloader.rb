@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 require 'date'
-require 'pry'
 require 'yaml/store'
-require 'faker'
+require 'ffaker'
 
 require_relative '../errors/presence_error'
 require_relative '../errors/object_instance_error'

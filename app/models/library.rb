@@ -37,7 +37,7 @@ class Library
 
   private
 
-  def popular(number, method)
-    @orders.group_by(&method).max_by(number) { |_, orders| orders.size }.map(&:first)
+  def popular(number, entity)
+    @orders.group_by(&entity).max_by(number) { |_, orders| orders.size }.map(&:first)
   end
 end

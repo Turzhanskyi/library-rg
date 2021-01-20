@@ -2,7 +2,6 @@
 
 class Book
   include Validator
-  attr_reader :title, :author
 
   def initialize(title, author)
     validate title, author
@@ -15,6 +14,8 @@ class Book
   end
 
   private
+
+  attr_reader :title, :author
 
   def validate(title, author)
     validate_presence(title: title)

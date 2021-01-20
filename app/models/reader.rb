@@ -2,7 +2,6 @@
 
 class Reader
   include Validator
-  attr_reader :name, :email, :city, :street, :house
 
   def initialize(name, email, city, street, house)
     validate name, email, city, street, house
@@ -18,6 +17,8 @@ class Reader
   end
 
   private
+
+  attr_reader :name, :email, :city, :street, :house
 
   def validate(name, email, city, street, house)
     validate_presence(name: name, email: email, city: city, street: street, house: house)

@@ -8,14 +8,14 @@ readers = []
 orders = []
 
 15.times do
-  authors.push Author.new(Faker::Book.unique.author, Faker::Lorem.sentence(word_count: 3))
+  authors.push Author.new(FFaker::Book.author, FFaker::Book.description)
 end
-27.times { books.push Book.new(Faker::Book.unique.title, authors[rand(0..14)]) }
+27.times { books.push Book.new(FFaker::Book.title, authors[rand(0..14)]) }
 68.times do
-  readers.push Reader.new(Faker::Name.name,
-                          Faker::Internet.unique.email,
-                          Faker::Address.city,
-                          Faker::Address.street_name,
+  readers.push Reader.new(FFaker::Name.name,
+                          FFaker::Internet.email,
+                          FFaker::Address.city,
+                          FFaker::Address.street_name,
                           rand(1..95))
 end
 100.times { orders.push Order.new(books[rand(0..26)], readers[rand(0..67)]) }
