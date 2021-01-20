@@ -14,9 +14,8 @@ class Order
   private
 
   def validate(book, reader, date)
-    validate_date(date)
-    validate_object(Date, date: date)
-    validate_object(Book, book: book)
-    validate_object(Reader, reader: reader)
+    validate_object?(book, Book)
+    validate_object?(reader, Reader)
+    validate_object?(date, Date)
   end
 end

@@ -18,8 +18,8 @@ class Book
   attr_reader :title, :author
 
   def validate(title, author)
-    validate_presence(title: title)
-    validate_object(String, title: title)
-    validate_object(Author, author: author)
+    validate_presence?(title: title)
+    validate_object?(title, String)
+    validate_object?(author, Author)
   end
 end

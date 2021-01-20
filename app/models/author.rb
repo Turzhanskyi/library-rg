@@ -18,7 +18,7 @@ class Author
   attr_reader :name, :biography
 
   def validate(name)
-    validate_presence(name: name)
-    validate_object(String, name: name)
+    validate_presence?(name: name)
+    validate_object?(name, String)
   end
 end

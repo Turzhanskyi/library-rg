@@ -21,8 +21,12 @@ class Reader
   attr_reader :name, :email, :city, :street, :house
 
   def validate(name, email, city, street, house)
-    validate_presence(name: name, email: email, city: city, street: street, house: house)
-    validate_positive_value(house)
-    validate_object(Integer, house: house)
+    validate_presence?(name: name)
+    validate_presence?(email: email)
+    validate_presence?(city: city)
+    validate_presence?(street: street)
+    validate_presence?(house: house)
+    validate_object?(house, Integer)
+    validate_positive_value?(house)
   end
 end
