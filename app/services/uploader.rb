@@ -7,13 +7,9 @@ module Uploader
     YAML.load_file(STORE) if File.file?(STORE)
   end
 
-  def save(authors:, books:, readers:, orders:)
-    store = YAML::Store.new STORE
-    store.transaction do
-      store['authors'] = authors
-      store['books'] = books
-      store['readers'] = readers
-      store['orders'] = orders
-    end
+  def save(data)
+    return if File.file?(STORE)
+
+    File.open(STORE, 'w') { |f| f.write(data.to_yaml) }
   end
 end

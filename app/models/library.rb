@@ -2,7 +2,6 @@
 
 class Library
   include Uploader
-  include Seeds
 
   def initialize
     data = load || {}
@@ -19,9 +18,19 @@ class Library
       when Book then @books.push entity
       when Reader then @readers.push entity
       when Order then @orders.push entity
-      else raise ObjectError
+      else raise ObjectError, entity
       end
     end
+  end
+
+  def save_data
+    data = {
+      authors: @authors,
+      books: @books,
+      readers: @readers,
+      orders: @orders
+    }
+    save(data)
   end
 
   def top_readers(number = 1)

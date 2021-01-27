@@ -3,7 +3,8 @@
 require_relative 'app/config/autoloader'
 
 library = Library.new
-library.seeds_generate
+LibrarySeeds.new(library).call
+library.save_data
 
 puts '*** Welcome to library! ***'
 puts 'Our statistic:'
