@@ -2,7 +2,7 @@
 
 module Validator
   def validate_presence?(options = {})
-    options.each { |key, value| raise PresenceError, key if value.to_s.strip.empty? }
+    raise PresenceError, options.keys if options.values.map { |value| value.to_s.strip.empty? }.all?
   end
 
   def validate_object?(object, klass)
