@@ -32,3 +32,13 @@
   #### 3. Adding at least one example of each entity to Library instance.
   #### 4. Call of the “store/save” method.
   #### 5. Call of all 3 statistics methods.
+
+### Installation:
+
+```ruby
+ bundle install
+```
+
+```ruby
+ ruby lib/entities/library.rb
+```
