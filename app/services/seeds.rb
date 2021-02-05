@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LibrarySeeds
+class Seeds
   AUTHORS_COUNT = 15
   BOOKS_COUNT = 27
   READERS_COUNT = 68
@@ -11,20 +11,24 @@ class LibrarySeeds
   end
 
   def call
-    authors = authors_generate
-    @library.add(authors)
-
-    books = books_generate(authors)
-    @library.add(books)
-
-    readers = readers_generate
-    @library.add(readers)
-
-    orders = orders_generate(books, readers)
-    @library.add(orders)
+    library_seeds_generate
   end
 
   private
+
+  def library_seeds_generate
+    authors = authors_generate
+    add_seed(authors)
+
+    books = books_generate(authors)
+    add_seed(books)
+
+    readers = readers_generate
+    add_seed(readers)
+
+    orders = orders_generate(books, readers)
+    add_seed(orders)
+  end
 
   def authors_generate
     AUTHORS_COUNT.times.collect do
@@ -52,5 +56,9 @@ class LibrarySeeds
     ORDERS_COUNT.times.collect do
       Order.new(books.sample, readers.sample)
     end
+  end
+
+  def add_seed(entity)
+    @library.add(entity)
   end
 end
